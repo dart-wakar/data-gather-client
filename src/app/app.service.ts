@@ -10,8 +10,8 @@ export class AppService {
 
     private accessKey = '275418-TellMe-RYYV1TBH';
 
-    getBooksData(): Observable<any> {
-        return this.http.get('https://tastedive.com/api/similar?q=harry potter&k=275418-TellMe-RYYV1TBH&limit=20&info=1&type=books')
+    getBooksData(movieTitle: string): Observable<any> {
+        return this.http.get('https://tastedive.com/api/similar?q='+movieTitle+'&k=275418-TellMe-RYYV1TBH&limit=20&info=1&type=books')
                         .map((res) => res.json())
                         .catch((err) => {
                             console.log(err);
@@ -28,8 +28,8 @@ export class AppService {
                 });
     }
 
-    getShowsData(): Observable<any> {
-        return this.http.get('https://tastedive.com/api/similar?q=harry potter&k=275418-TellMe-RYYV1TBH&limit=20&info=1&type=shows')
+    getShowsData(movieTitle: string): Observable<any> {
+        return this.http.get('https://tastedive.com/api/similar?q='+movieTitle+'&k=275418-TellMe-RYYV1TBH&limit=20&info=1&type=shows')
                         .map((res) => res.json())
                         .catch((err) => {
                             console.log(err);
@@ -37,8 +37,8 @@ export class AppService {
                         });
     }
 
-    getMusicData(): Observable<any> {
-        return this.http.get('https://tastedive.com/api/similar?q=harry potter&k=275418-TellMe-RYYV1TBH&limit=20&info=1&type=music')
+    getMusicData(movieTitle: string): Observable<any> {
+        return this.http.get('https://tastedive.com/api/similar?q='+movieTitle+'&k=275418-TellMe-RYYV1TBH&limit=20&info=1&type=music')
                         .map((res) => res.json())
                         .catch((err) => {
                             console.log(err);
@@ -46,8 +46,8 @@ export class AppService {
                         });
     }
 
-    getAuthorsData(): Observable<any> {
-        return this.http.get('https://tastedive.com/api/similar?q=harry potter&k=275418-TellMe-RYYV1TBH&limit=20&info=1&type=authors')
+    getAuthorsData(movieTitle: string): Observable<any> {
+        return this.http.get('https://tastedive.com/api/similar?q='+movieTitle+'&k=275418-TellMe-RYYV1TBH&limit=20&info=1&type=authors')
                         .map((res) => res.json())
                         .catch((err) => {
                             console.log(err);
@@ -55,8 +55,8 @@ export class AppService {
                         });
     }
 
-    getGamesData(): Observable<any> {
-        return this.http.get('https://tastedive.com/api/similar?q=harry potter&k=275418-TellMe-RYYV1TBH&limit=20&info=1&type=games')
+    getGamesData(movieTitle: string): Observable<any> {
+        return this.http.get('https://tastedive.com/api/similar?q='+movieTitle+'&k=275418-TellMe-RYYV1TBH&limit=20&info=1&type=games')
                         .map((res) => res.json())
                         .catch((err) => {
                             console.log(err);

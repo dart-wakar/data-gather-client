@@ -9,24 +9,34 @@ import {movieTitles} from './movieTitles';
 })
 export class AppComponent implements OnInit {
   title = 'Data gather';
+  currentMovieTitle: string;
+  currentMovieId: number;
+  iterator: number;
 
   constructor(private appService: AppService) {}
 
   ngOnInit() {
-    
+    this.iterator = 9124;
   }
 
   gatherData() {
-    this.appService.getBooksData()
-        .subscribe(results => {
-          console.log(results);
-          this.setBooksData(results);
-        })
+      if(this.iterator >= 9120){
+          console.log(this.iterator);
+          this.currentMovieId = this.iterator+1;
+          this.currentMovieTitle = movieTitles[this.iterator];
+          console.log(this.currentMovieTitle);
+          this.appService.getBooksData(this.currentMovieTitle)
+            .subscribe(results => {
+              console.log(results);
+              this.setBooksData(results);
+            })
+      }
+         
   }
 
   setBooksData(res: any) {
     var data:any = {};
-    data.movie_id = 250;
+    data.movie_id = this.currentMovieId;
     data.movie_name = res.Similar.Info[0].Name;
     data.movie_wikipedia_description = res.Similar.Info[0].wTeaser;
     data.movie_wikipedia_url = res.Similar.Info[0].wUrl;
@@ -41,7 +51,7 @@ export class AppComponent implements OnInit {
   }
 
   getShowsData() {
-    this.appService.getShowsData()
+    this.appService.getShowsData(this.currentMovieTitle)
       .subscribe(results => {
         console.log(results);
         this.setShowsData(results);
@@ -50,7 +60,7 @@ export class AppComponent implements OnInit {
 
   setShowsData(res: any) {
     var data:any = {};
-    data.movie_id = 250;
+    data.movie_id = this.currentMovieId;
     data.movie_name = res.Similar.Info[0].Name;
     data.movie_wikipedia_description = res.Similar.Info[0].wTeaser;
     data.movie_wikipedia_url = res.Similar.Info[0].wUrl;
@@ -66,7 +76,7 @@ export class AppComponent implements OnInit {
   }
 
   getMusicData() {
-    this.appService.getMusicData()
+    this.appService.getMusicData(this.currentMovieTitle)
       .subscribe(results => {
         console.log(results);
         this.setMusicData(results);
@@ -75,7 +85,7 @@ export class AppComponent implements OnInit {
 
   setMusicData(res: any) {
     var data:any = {};
-    data.movie_id = 250;
+    data.movie_id = this.currentMovieId;
     data.movie_name = res.Similar.Info[0].Name;
     data.movie_wikipedia_description = res.Similar.Info[0].wTeaser;
     data.movie_wikipedia_url = res.Similar.Info[0].wUrl;
@@ -92,7 +102,7 @@ export class AppComponent implements OnInit {
   }
 
   getAuthorsData() {
-    this.appService.getAuthorsData()
+    this.appService.getAuthorsData(this.currentMovieTitle)
       .subscribe(results => {
         console.log(results);
         this.setAuthorsData(results);
@@ -101,7 +111,7 @@ export class AppComponent implements OnInit {
 
   setAuthorsData(res: any) {
     var data:any = {};
-    data.movie_id = 250;
+    data.movie_id = this.currentMovieId;
     data.movie_name = res.Similar.Info[0].Name;
     data.movie_wikipedia_description = res.Similar.Info[0].wTeaser;
     data.movie_wikipedia_url = res.Similar.Info[0].wUrl;
@@ -119,7 +129,7 @@ export class AppComponent implements OnInit {
   }
 
   getGamesData() {
-    this.appService.getGamesData()
+    this.appService.getGamesData(this.currentMovieTitle)
       .subscribe(results => {
         console.log(results);
         this.setGamesData(results);
@@ -128,7 +138,7 @@ export class AppComponent implements OnInit {
 
   setGamesData(res: any) {
     var data:any = {};
-    data.movie_id = 250;
+    data.movie_id = this.currentMovieId;
     data.movie_name = res.Similar.Info[0].Name;
     data.movie_wikipedia_description = res.Similar.Info[0].wTeaser;
     data.movie_wikipedia_url = res.Similar.Info[0].wUrl;
@@ -142,6 +152,9 @@ export class AppComponent implements OnInit {
           console.log(movie.music);
           console.log(movie.authors);
           console.log(movie.games);
+          this.iterator--;
+          console.log(this.iterator);
+          this.gatherData();
         });
   }
 
