@@ -16,11 +16,11 @@ export class AppComponent implements OnInit {
   constructor(private appService: AppService) {}
 
   ngOnInit() {
-    this.iterator = 9124;
+    this.iterator = 8930;
   }
 
   gatherData() {
-      if(this.iterator >= 9120){
+      if(this.iterator >= 8905){
           console.log(this.iterator);
           this.currentMovieId = this.iterator+1;
           this.currentMovieTitle = movieTitles[this.iterator];
